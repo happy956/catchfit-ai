@@ -1,0 +1,15 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+/data
+/Include
+/Lib
+/results
+/Scripts
+/share
+/weights
+pyvenv.cfg
+
+inference.py

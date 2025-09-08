@@ -1,0 +1,9 @@
+bbox_model_weight: 'yolo12x.pt'
+bbox_classes: [0]
+
+outline_model_weight: 'facebook/sam2-hiera-large' # segment anything2
+
+segmentator_model_version: '1b'
+segmentator_model_weight: 'sapiens_1b_goliath_best_goliath_mIoU_7994_epoch_151_torchscript.pt2'
+
+pose_estimator_model_weight: yolo11x-pose.pt
