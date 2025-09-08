@@ -13,9 +13,9 @@ RUN mkdir /app/
 
 WORKDIR /app/
 
-RUN git clone https://github.com/team-healica/ai.git
+RUN git clone https://github.com/happy956/catchfit-ai.git
 
-WORKDIR /app/ai/
+WORKDIR /app/catchfit-ai/
 
 RUN pip3 install -r requirements.txt
 
@@ -23,4 +23,4 @@ RUN apt-get update -y && \
     apt-get install -y libgl1-mesa-glx && \
     apt-get install -y libglib2.0-0
 
-CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "6000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "6000"]
