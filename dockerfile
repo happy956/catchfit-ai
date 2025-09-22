@@ -20,7 +20,11 @@ WORKDIR /app/catchfit-ai/
 RUN pip3 install -r requirements.txt
 
 RUN apt-get update -y && \
+    apt-get install -y git && \
+    apt-get install -y wget && \
     apt-get install -y libgl1-mesa-glx && \
-    apt-get install -y libglib2.0-0
+    apt-get install -y libglib2.0-0 && \
+    apt-get install -y libxcb-xinerama0-dev && \
+    apt-get install -y libgl1
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "6000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
