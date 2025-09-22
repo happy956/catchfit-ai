@@ -9,7 +9,7 @@ app = FastAPI()
 
 @app.get('/')
 def home():
-    return "CatchFit API Server"
+    return {'result': "CatchFit API Server"}
 
 @app.post('/outline')
 async def get_outline(file: UploadFile):
