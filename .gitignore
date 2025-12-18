@@ -6,3 +6,7 @@
 /share
 /weights
 pyvenv.cfg
+
+__pycache__
+/modules/__pycache__/
+logs/

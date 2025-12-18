@@ -11,6 +11,7 @@ class OutLiner:
         self.device = self.args['device']
         self.model_weight = self.args['outline_model_weight']
         self.model = SAM2ImagePredictor.from_pretrained(self.model_weight)
+        self.model.save_pretrained('../weights/sam2')
     
     @torch.inference_mode()
     @torch.autocast('cuda', dtype=torch.bfloat16)

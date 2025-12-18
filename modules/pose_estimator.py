@@ -13,7 +13,7 @@ class PoseEstimator:
         self.model.eval()
     
     def get_keypoints(self, img):
-        output = self.model(img)
+        output = self.model(img, verbose=False)
         result = output[0]
         
         max_area = -np.inf
@@ -22,16 +22,22 @@ class PoseEstimator:
             area = w * h
             if area > max_area:
                 max_area = area
-                max_keypoint = keypoint.xy[0].cpu().detach().numpy()
+                max_keypoint = keypoint.xy[0]
                 max_xyxy = box.xyxy[0].cpu().detach().numpy()
-        return max_xyxy, max_keypoint
+                conf = keypoint.conf
+        
+        mask = torch.where(conf >= 0.5, 1, 0)[0].bool()
+        keypoint = max_keypoint.clone()
+        keypoint[~mask] = -1
+        return max_xyxy, keypoint.cpu().detach().numpy()
 
 if __name__ == '__main__':
     with open('config.yaml', 'r') as f:
         args = yaml.safe_load(f)
     args['device'] = 'cuda' if torch.cuda.is_available() else 'cpu'
     
-    img = cv2.imread('data/dataset1/IMG_6849.jpg')
+    # img = cv2.imread('data/dataset3/KakaoTalk_20251006_165727629_04.jpg')
+    img = cv2.imread('test.png')
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     model = PoseEstimator(args)
     xyxy, keypoint = model.get_keypoints(img)

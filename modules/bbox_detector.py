@@ -14,7 +14,7 @@ class BBOXDetector:
         self.model.eval()
     
     def get_bbox(self, img):
-        results = self.model(img, classes=self.bbox_classes)
+        results = self.model(img, classes=self.bbox_classes, verbose=False)
         
         max_bbox = None
         max_area = -np.inf
